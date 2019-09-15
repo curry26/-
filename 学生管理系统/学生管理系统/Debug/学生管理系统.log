@@ -1,0 +1,6 @@
+﻿  main.c
+  score.c
+g:\大二上\学生管理系统\学生管理系统\score.c(56): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\大二上\学生管理系统\学生管理系统\score.c(93): warning C4013: “strcmp”未定义；假设外部返回 int
+  正在生成代码...
+  学生管理系统.vcxproj -> G:\大二上\学生管理系统\Debug\学生管理系统.exe
