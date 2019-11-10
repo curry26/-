@@ -1,140 +1,74 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include<windows.h>
+#include"POINT.H"
+#include"windows.h"
 #include<cstdlib>
-#include"string"
 #include<iostream>
 using namespace std;
-
-class student
-{
-private:
-	char *name;
-	char id[10];
-	int age;
-	string home;
-public:
-	student();
-	student(const char *n,const char i[],int a,string h);
-	student(const student &stu);
-
-	~student();
-
-	void changestudent();
-	void print();
-
-};
-//-----------无参构造函数---------------
-student::student()
-{
-	cout << "无参构造函数执行了" << endl;
-}
-//-----------有参构造函数------------------
-student::student(const char *n, const char i[], int a, string h)
-{
-	cout << "有参构造函数执行了" << endl;
-	if (n)
-	{
-		int l = strlen(n);
-		this->name = new char[l + 1];
-		strcpy(this->name, n);
-	}
-	strcpy(this->id, i);
-	this->age = a;
-	this->home = h;
-}
-//------------拷贝构造函数-----------------
-student::student(const student&stu)
-{
-	cout << "拷贝构造函数执行了" << endl; 
-	age = stu.age;
-	home = stu.home;
-	if (stu.name)
-	{
-		int l = strlen(stu.name);
-		this->name = new char[l + 1];
-		strcpy(this->name,stu.name);
-	}
-	strcpy(this->id, stu.id);
-}
-//-----------析构函数--------------------
-student::~student()
-{
-	cout << "析构函数执行了" << endl;
-}
-//------------普通函数---------------------
-void student::changestudent()
-{
-	cout << "您是否要修改姓名？输入1为是，输入2为否" << endl;
-	int x;
-	cin >> x;
-	if (x == 1)
-	{
-		char xname[10];
-		cout << "请输入新的名字：" << endl;
-		cin >> xname;
-		int len = strlen(xname);
-		this->name = new char[len + 1];
-		strcpy(this->name, xname);
-	}
-	if (x == 2)
-	{
-		cout << "不修改" << endl;
-	}
-	cout << "您是否要修改学号？输入1为是，输入2为否" << endl;
-	int y;
-	cin >> y;
-	if (y == 1)
-	{
-		char xid[10];
-		cout << "请输入新的学号：" << endl;
-		cin >> xid;
-		strcpy(this->id, xid);
-	}
-	if (y == 2)
-	{
-		cout << "不修改" << endl;
-	}
-	cout << "您是否要修改年龄？输入1为是，输入2为否" << endl;
-	int z;
-	cin >> z;
-	if (z == 1)
-	{
-		cout << "请输入新的年龄" << endl;
-		cin >> this->age;
-	}
-	if (z == 2)
-	{
-		cout << "不修改" << endl;
-	}
-	cout << "您是否要修改住址？输入1为是，输入2为否" << endl;
-	int k;
-	cin >> k;
-	if (k == 1)
-	{
-		cout << "请输入新的住址" << endl;
-		cin >> this->home;
-	}
-	if (k == 2)
-	{
-		cout << "不修改" << endl;
-	}
-
-	
-}
-void student::print()
-{
-	cout << "姓名:" << this->name << endl << "学号：" << this->id << endl << "年龄：" << this->age << endl << "住址：" << this->home << endl;
-}
-//-------------主函数--------------------
+//-------------------主函数-----------------------------------
 int main()
 {
-	cout << "第七次：类的设计与使用" << endl;
-	student();
-	student lixiao("lixiao","06",19,"weifang");
-	lixiao.changestudent();
-	lixiao.print();
-	student xiaoxiao(lixiao);
-	xiaoxiao.print();
+	cout << "第八次c++作业！！！！" << endl;
+	
+	cout << "请依次输入栈上端点对象数组十个点的坐标：" << endl;
+	Point *array_stack = new Point[10];
+	cout << "请依次输入堆上端点对象数组十个点的坐标：" << endl;
+	Point *array_heap = new Point[10];
+	double lx[10];
+	cout << "任务：输出这两个对象数组中相同位置上两个对象之间的距离，如下：" << endl;
+	for (int i = 0; i < 10; i++)
+	{
+		lx[i] = GetLength(array_heap[i],array_stack[i]);
+		cout << "第" << i+1 << "对之间的距离为：" << lx[i] << endl;
+	}
+
+	cout << "接下来我们测试一下其他的功能！" << endl;
+	cout << "我们以点（8,25）为例进行演示" << endl;
+	Point A(8,25);
+	cout << "请选择你要执行的功能：" << endl;
+	cout << "1、提取该点的横坐标" << endl;
+	cout << "2、提取该点的纵坐标" << endl;
+	cout << "3、修改该点的横坐标" << endl;
+	cout << "4、修改该点的纵坐标" << endl;
+	cout << "5、交换该点的横纵坐标值" << endl;
+	cout << "0:退出" << endl;
+	int p;
+	while (true)
+	{
+		
+		cin >> p;
+		switch (p)
+		{
+		case 1:
+			A.GetX();
+			break;
+		case 2:
+			A.GetY();
+			break;
+		case 3:
+			cout << "请输入修改后的横坐标值：" << endl;
+			double z;
+			cin >> z;
+			A.SetX(z);
+			A.GetX();
+			break;
+		case 4:
+			cout << "请输入修改后的纵坐标值：" << endl;
+			double v;
+			cin >> v;
+			A.SetY(v);
+			A.GetY();
+			break;
+		case 5:
+			A.SwapAxis();
+			cout << "交换坐标值后的横纵坐标为：" << endl;
+			A.GetX();
+			A.GetY();
+			break;
+		default:
+			break;
+		}
+		if (p == 0)
+			break;
+	}
 	system("pause");
 	return 0;
 }
